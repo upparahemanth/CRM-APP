@@ -2,6 +2,7 @@ package com.crm.controller;
 
 import java.io.IOException;
 
+
 import com.crm.dao.UserDAO;
 import com.crm.dao.UserDAOImpl;
 import com.crm.dto.User;
@@ -11,29 +12,25 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/Login")
-public class LoginServlet extends HttpServlet {
-
+@WebServlet("/Upadte")
+public class UpdateServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		int userId = Integer.parseInt(req.getParameter("uid"));
+		String userName = req.getParameter("uname");
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		
-		UserDAO udao=new UserDAOImpl();
-		User user=udao.loginUser(email, password);
-		
-		HttpSession session=req.getSession();
-		if(user!=null) {
-			session.setAttribute("us", user);
+		String role = req.getParameter("role");
+		User user = new User(userId, userName, email, password, role);
+
+		UserDAO udao = new UserDAOImpl();
+		boolean updateduser = udao.updateuser(user);
+		if (updateduser) {
 			resp.sendRedirect("Dashboard");
 		}
-		else {
-			resp.sendRedirect("Login.jsp");
-		}
-		
+	
 
 	}
 

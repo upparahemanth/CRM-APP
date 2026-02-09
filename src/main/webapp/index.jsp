@@ -6,58 +6,35 @@
 <meta charset="UTF-8">
 <title>Home</title>
 
+<%@ include file="Navbar.jsp" %>
+
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background-color: #eef2f7;
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background-color: #f3f4f6;
         margin: 0;
         padding: 0;
-    }
-
-    .container {
-        width: 400px;
-        margin: 100px auto;
-        background-color: #ffffff;
-        padding: 30px;
         text-align: center;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     h1 {
-        color: #333;
+        margin-top: 150px;
+        color: #111827;
+        font-size: 32px;
     }
 
     p {
-        color: #666;
-        margin-bottom: 20px;
-    }
-
-    a {
-        display: block;
-        margin: 10px 0;
-        padding: 10px;
-        text-decoration: none;
-        background-color: #007bff;
-        color: white;
-        border-radius: 4px;
-    }
-
-    a:hover {
-        background-color: #0056b3;
+        color: #6b7280;
+        font-size: 16px;
+        margin-top: 10px;
     }
 </style>
 
 </head>
 <body>
 
-<div class="container">
-    <h1>Welcome to CRM App</h1>
-    <p>Customer Relationship Management System</p>
-
-    <a href="Register.jsp">Register</a>
-    <a href="Login.jsp">Login</a>
-</div>
+<h1>Welcome to CRM App</h1>
+<p>Customer Relationship Management System</p>
 
 </body>
 </html>

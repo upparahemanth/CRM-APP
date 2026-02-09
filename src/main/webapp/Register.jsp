@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Registration page</title>
+<%@  include file="Navbar.jsp" %>
 <style>
     body {
         font-family: Arial, sans-serif;
