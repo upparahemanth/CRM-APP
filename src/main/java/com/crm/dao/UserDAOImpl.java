@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.crm.dto.Product;
 import com.crm.dto.User;
 import com.crm.util.DBConn;
 
@@ -119,11 +120,11 @@ public class UserDAOImpl implements UserDAO {
 
 		try {
 			PreparedStatement pstmt = con.prepareStatement(update);
-			 pstmt.setString(1, Updateuser.getUserName());
-		        pstmt.setString(2, Updateuser.getEmail());
-		        pstmt.setString(3, Updateuser.getPassword());
-		        pstmt.setString(4, Updateuser.getRole());
-		        pstmt.setInt(5, Updateuser.getUserId());
+			pstmt.setString(1, Updateuser.getUserName());
+			pstmt.setString(2, Updateuser.getEmail());
+			pstmt.setString(3, Updateuser.getPassword());
+			pstmt.setString(4, Updateuser.getRole());
+			pstmt.setInt(5, Updateuser.getUserId());
 			int count = pstmt.executeUpdate();
 			if (count > 0) {
 				return true;
@@ -136,23 +137,73 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public boolean deleteuserById(int UserId) {
-		 
-		con=DBConn.getConnection();
-		String delete="DELETE FROM user WHERE uid=?";
+
+		con = DBConn.getConnection();
+		String delete = "DELETE FROM user WHERE uid=?";
 		try {
-			PreparedStatement pstmt=con.prepareStatement(delete);
+			PreparedStatement pstmt = con.prepareStatement(delete);
 			pstmt.setInt(1, UserId);
-			int count=pstmt.executeUpdate();
-			if(count>0) {
+			int count = pstmt.executeUpdate();
+			if (count > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
+	@Override
+	public boolean addProducts(Product product) {
 
+		con = DBConn.getConnection();
+		String add = "INSERT INTO product VALUES(?,?,?,?,?)";
+
+		try {
+			PreparedStatement pstmt = con.prepareStatement(add);
+			pstmt.setInt(1, product.getPid());
+			pstmt.setString(2, product.getPname());
+			pstmt.setDouble(3, product.getPrice());
+			pstmt.setInt(4, product.getQuantity());
+			pstmt.setString(5, product.getUrl());
+			int count = pstmt.executeUpdate();
+			if (count > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+	@Override
+	public List<Product> getAllProducts() {
+		con = DBConn.getConnection();
+		String allproducts = "SELECT * FROM product";
+		List<Product> plist = new ArrayList<>();
+
+		try {
+			PreparedStatement pstmt = con.prepareStatement(allproducts);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Product product = new Product();
+				product.setPid(rs.getInt(1));
+				product.setPname(rs.getString(2));
+				product.setPrice(rs.getDouble(3));
+				product.setQuantity(rs.getInt(4));
+				product.setUrl(rs.getString(5));
+				plist.add(product);
+			}
+			return plist;
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 
 }

@@ -20,3 +20,6 @@ public class LogoutServlet extends HttpServlet {
 		resp.sendRedirect("index.jsp");
 	}
 }
+
+
+//this is a CrmApp

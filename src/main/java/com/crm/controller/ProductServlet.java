@@ -1,9 +1,11 @@
 package com.crm.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.crm.dao.UserDAO;
 import com.crm.dao.UserDAOImpl;
+import com.crm.dto.Product;
 import com.crm.dto.User;
 
 import jakarta.servlet.ServletException;
@@ -12,21 +14,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/Edit")
-public class EditFormServlet extends HttpServlet {
+@WebServlet("/Product")
+public class ProductServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-   
-		int userId = Integer.parseInt(req.getParameter("uid"));
-		UserDAO udao = new UserDAOImpl();
-		User user = udao.getUserById(userId);
-		if (user != null) {
-			req.setAttribute("euser", user);
-			req.getRequestDispatcher("Edit-Form.jsp").forward(req, resp);
+		UserDAO udao=new UserDAOImpl();
+		List<Product> plist = udao.getAllProducts();
+		if (!plist.isEmpty()) {
+			req.setAttribute("plist", plist);
+			req.getRequestDispatcher("Products.jsp").forward(req, resp);
 		}
-
 	}
 }
-
-
-//this is a CrmApp

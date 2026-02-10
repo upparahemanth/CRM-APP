@@ -43,6 +43,8 @@
             <a href="index.jsp">Home</a>
             <a href="Dashboard">Dashboard</a>
             <a href="Register.jsp">Register</a>
+            <a href="Product">Products</a>
+            <a href="AddProducts.jsp">Add Products</a>
         </div>
 
         <!-- Right side -->
